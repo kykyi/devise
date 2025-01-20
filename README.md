@@ -703,6 +703,19 @@ def send_devise_notification(notification, *args)
 end
 ```
 
+## Security Settings
+
+### Modification of the password length and complexity
+Previously devise came with a rather basic set of password requirement configuration. Devise now allows you to also set more complex requirements such as:
+
+* Length of Passwords,
+* Presence of lower case characters,
+* Presence of upper case characters,
+* Presence of a number,
+* Presence of specified special characters.
+
+The configuration of the password requirements, by default configured only to a minimal length, is described in the [wiki](https://github.com/heartcombo/devise/wiki/Customize-password-requirements).
+
 ### Password reset tokens and Rails logs
 
 If you enable the [Recoverable](http://rubydoc.info/github/heartcombo/devise/main/Devise/Models/Recoverable) module, note that a stolen password reset token could give an attacker access to your application. Devise takes effort to generate random, secure tokens, and stores only token digests in the database, never plaintext. However the default logging behavior in Rails can cause plaintext tokens to leak into log files:
@@ -715,7 +728,6 @@ Rails sets the production logger level to INFO by default. Consider changing you
 ```ruby
 config.log_level = :warn
 ```
-
 
 ### Other ORMs
 

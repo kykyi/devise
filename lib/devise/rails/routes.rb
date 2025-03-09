@@ -235,6 +235,7 @@ module ActionDispatch::Routing
       options[:constraints]   = (@scope[:constraints] || {}).merge(options[:constraints] || {})
       options[:defaults]      = (@scope[:defaults] || {}).merge(options[:defaults] || {})
       options[:options]       = @scope[:options] || {}
+      options[:options][:format] = false if options[:format] == false
 
       resources.map!(&:to_sym)
 
@@ -461,7 +462,7 @@ ERROR
         current_scope = @scope.dup
 
         exclusive = { as: new_as, path: new_path, module: nil }
-        exclusive.merge!(options.slice(:constraints, :format, :defaults, :options))
+        exclusive.merge!(options.slice(:constraints, :defaults, :options))
 
         if @scope.respond_to? :new
           @scope = @scope.new exclusive
